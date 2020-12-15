@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>magic square</title>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<!--<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">-->
+	<style type="text/css">
+		.center{
+		    text-align: center;
+		    width: 25%;
+		    margin: auto;
+		   
+		 }
+		 .row{
+		 	
+		 	display: flex;
+		 	margin: auto;
+		 	height: 50px;
+
+            
+		 }
+		 .box{
+		 	width: 33.333%;
+		 }
+		 .col1{
+		 	border-left: 4px solid black;
+		 }
+		 .row1{
+		 	border-top: 4px solid black;
+		 }
+		 .row1 , .row2 , .row3{
+		 	border-bottom: 4px solid black;
+		 } 
+		 .col1, .col2 , .col3{
+		 	border-right : 4px solid black;
+		 }
+		 #note{
+		 	text-align: center;
+		 	color: #333;
+		 	padding: 5px;
+		 	border-bottom: 4px #000 solid; 
+		 	width: 70%;
+		 	margin: auto;
+
+		 }
+		 #main_head{
+		 	text-align: center;
+		 	background: #333;
+		 	color: #fff;
+		 	padding: 20px;
+		 	border-bottom: 4px #000 solid; 
+		 }
+		 .btn_1{
+		 	border: none;
+		 	padding: 10px;
+		 	margin: 10px;
+		 	background-color: #333;
+		 	color: white;
+		 	border-radius: 10px;
+		 	cursor: pointer;
+		 }
+		    input {border:0;
+		    	outline:0;
+		    	text-align: center;
+		    	margin-top: 2px;
+		    	height: 92%;
+		    	width: 98%;
+		    	font-size: 120%;
+		    	background-color: #333;
+		    	color: white;
+		    }
+			input:focus {outline:none!important;}
+			body{
+				background-color: gray;
+			}
+			.message{
+				text-align: center;
+				font-size: 120%;
+			}
+	</style>
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			for(i=1;i<=9;i++){
+			  $("#in"+i).css("font-size", "120%")
+			  $("#in"+i).css("text-align", "center")
+			  
+			  
+			}
+		})
+
+		function check(){
+		    var ready = 15;
+		    var regex=/^[0-9]+$/;
+		  
+
+			var x1 = parseInt(document.getElementById("in1").value);
+			var x2 = parseInt(document.getElementById("in2").value);
+			var x3 = parseInt(document.getElementById("in3").value);
+			var x4 = parseInt(document.getElementById("in4").value);
+			var x5 = parseInt(document.getElementById("in5").value);
+			var x6 = parseInt(document.getElementById("in6").value);
+			var x7 = parseInt(document.getElementById("in7").value);
+			var x8 = parseInt(document.getElementById("in8").value);
+			var x9 = parseInt(document.getElementById("in9").value);
+
+			x1 = x1 || 0
+			x2 = x2 || 0
+			x3 = x3 || 0
+			x4 = x4 || 0
+			x5 = x5 || 0
+			x6 = x6 || 0
+			x7 = x7 || 0
+			x8 = x8 || 0
+			x9 = x9 || 0
+
+			 if(x1!="" && x2!="" && x3!="" && x4!="" && x5!="" && x6!="" && x7!="" && x8!="" && x9!="")
+			 {
+			 	
+				 	if(x1<10 && x2<10 && x3<10 && x4<10 && x5<10 && x6<10 && x7<10 && x8<10 && x9<10 )
+				 	{
+			    		if(x1!=x2 && x1!=x3 && x1!=x4 && x1!=x5 && x1!=x6 && x1!=x7 && x1!=x8 && x1!=x9 && x2!=x3 && x2!=x4 && x2!=x5 && x2!=x6 && x2!=x7 && x2!=x8 && x2!=x9 && x3!=x4 && x3!=x5 && x3!=x6 && x3!=x7 && x3!=x8 && x3!=x9 && x4!=x5 && x4!=x6 && x4!=x7 && x4!=x8 && x4!=x9 && x5!=x6 && x5!=x7 && x5!=x8 && x5!=x9 && x6!=x7 && x6!=x8 && x6!=x9 && x7!=x8 && x7!=x9 && x8!=x9  )
+				    	{
+				    		if(x1+x2+x3==ready && x4+x5+x6==ready && x7+x8+x9==ready && x1+x4+x7==ready && x2+x5+x8==ready && x3+x6+x9==ready && x1+x5+x9==ready && x3+x5+x7==ready)
+				    		{
+				      			$('#say').text("Yes ! it is a Magic square");
+				      			$('#say').css("color","green");
+
+				    		}
+				   	 		else{
+				      			$('#say').text("Bad luck ! It is not a magic square,the row sum or coloumn sum are not same :( Try one more time !");
+				      			$('#say').css("color","red");
+				      
+				    			}
+				    	}
+				  		else{
+				     		$('#say').text(" You cannot use the same number twice ! Try one more time !:)");
+				     		$('#say').css("color","red");
+				  	}		}
+				    else{
+				  		$('#say').text(" Use numbers between(1-9) ! Try one more time !:)");
+				  		$('#say').css("color","red");
+				
+				  		}
+				  		
+			 }
+			 else{
+			     $('#say').text("Hey ! You cannot left the box empty or filled with alphabets :( Try numbers between(1-9) :)")
+			     $('#say').css("color","red");
+			 }
+
+			}
+			$(document).ready(function(){
+				$('#reset_button').on('click',function(){
+					$('input').val('');
+					$('#say').text(':) Try one more time :) Fill her up!')
+					$('#say').css("color","brown");
+					
+
+				});
+			});
+
+	</script>
+</head>
+<body>
+	<header id="main_head">
+		<h1>TO CHECK WETHER A (3 x 3) MATRIX IS A MAGIC SQUARE OR NOT</h1>
+	</header>
+	<div id="note">
+		<h2>Enter a 3 x 3 matrix down here</h2>
+	</div>
+	<br><br>
+<div class="center">
+	<div class="row row1">
+		<div class="box col1" id="1"><input type="tel" id="in1" ></div>
+		<div class="box col2" id="2"><input type="tel" id="in2" ></div>
+		<div class="box col3" id="3"><input type="tel" id="in3" ></div>
+	</div>
+	<div class="row row2">
+		<div class="box col1" id="4"><input type="tel" id="in4" ></div>
+		<div class="box col2" id="5"><input type="tel" id="in5" ></div>
+		<div class="box col3" id="6"><input type="tel" id="in6" ></div>
+	</div>
+	<div class="row row3">
+		<div class="box col1" id="7"><input type="tel" id="in7" ></div>
+		<div class="box col2" id="8"><input type="tel" id="in8" ></div>
+		<div class="box col3" id="9"><input type="tel" id="in9" ></div>
+	</div>
+
+
+
+
+
+
+
+
+<!--<input type="tel" id="in1" >
+<input type="tel" id="in2" >
+<input type="tel" id="in3" > <br>
+<input type="tel" id="in4" >
+<input type="tel" id="in5" >
+<input type="tel" id="in6" ><br>
+<input type="tel" id="in7" >
+<input type="tel" id="in8" >
+<input type="tel" id="in9" ><br>
+-->
+<button onclick="check()" class="btn_1">Check</button>
+<button id="reset_button" class="btn_1">Reset</button>
+
+</div>
+<div class="message">
+	<p id="say">Pls fill all the coloumns</p>
+</div>
+</body>
+
+</html>
